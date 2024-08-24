@@ -12,7 +12,7 @@ const app = express();
 // Using for logging purpose
 app.use(morgan("common")); // also changed it to other formats like "dev", "tiny", "combined" etc.
 
-app.use(express.json()); // Converts incomming requests JSON payload to JavaScript object.
+app.use(express.json()); // Converts incoming requests JSON payload to JavaScript object.
 
 const port = process.env.PORT || 5000;
 
