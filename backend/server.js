@@ -1,8 +1,9 @@
 import dotenv from "dotenv";
 import colors from "colors";
 import express from "express";
-import connectDb from "./config/db.js";
 import morgan from "morgan";
+import connectDb from "./config/db.js";
+import authRoutes from "./routes/auth.js";
 
 dotenv.config();
 
@@ -13,6 +14,8 @@ const app = express();
 app.use(morgan("common")); // also changed it to other formats like "dev", "tiny", "combined" etc.
 
 app.use(express.json()); // Converts incoming requests JSON payload to JavaScript object.
+
+app.use("/api/auth", authRoutes);
 
 const port = process.env.PORT || 5000;
 
