@@ -23,7 +23,7 @@ export const login = asyncHandler(async (req, res) => {
     name: user.name,
     email: user.email,
     isAdmin: user.isAdmin,
-    tokon: user.createToken(),
+    token: user.CreateToken(),
   });
 });
 
@@ -44,6 +44,6 @@ export const register = asyncHandler(async (req, res) => {
     name: createdUser.name,
     email: createdUser.email,
     isAdmin: createdUser.isAdmin,
-    token: createdUser.createToken(),
+    token: createdUser.CreateToken(),
   });
 });

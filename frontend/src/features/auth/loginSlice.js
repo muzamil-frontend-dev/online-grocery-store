@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
 let userInfoFormStorage = null;
 try {
@@ -43,4 +44,26 @@ export const loginSelector = (state) => state.login;
 
 export default loginSlice.reducer;
 
-// export const loginUser = (email, password) => async (dispach, getState) => {}
+export const loginUser = (email, password) => async (dispatch, getState) => {
+  try {
+    dispatch(setLoading());
+    const config = {
+      headers: {
+        "content-type": "application/json",
+      },
+    };
+    const { data } = await axios.post(
+      "/api/auth/login",
+      { email, password },
+      config
+    );
+    dispatch(setUserInfo(data));
+    localStorage.setItem("userInfo", JSON.stringify(getState().login.userInfo));
+  } catch (err) {
+    const error =
+      err.response && err.response.data && err.response.data.message
+        ? err.response.data.message
+        : err.message;
+    dispatch(setError(error));
+  }
+};
