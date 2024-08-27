@@ -1,7 +1,8 @@
 import React from "react";
+import { Alert } from "react-bootstrap";
 
-const Message = () => {
-  return <div>Message</div>;
+const Message = ({ children, variant = "danger" }) => {
+  return <Alert variant={variant}>{children}</Alert>;
 };
 
 export default Message;
