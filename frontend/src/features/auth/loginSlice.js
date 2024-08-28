@@ -67,3 +67,8 @@ export const loginUser = (email, password) => async (dispatch, getState) => {
     dispatch(setError(error));
   }
 };
+
+export const setUserInfoByRegister = (userInfo) => async (dispatch) => {
+  dispatch(setUserInfo(userInfo));
+  localStorage.setItem("userInfo", JSON.stringify(userInfo));
+};
