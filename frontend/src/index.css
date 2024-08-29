@@ -12,11 +12,18 @@ code {
     monospace;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
 /* Header Section */
 header {
-  padding: 5px 0;
+  padding: 10px 0;
+  border-bottom: 1px solid #007d2f;
   background-color: #ffffff;
-  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.1);
+  z-index: 999;
 
   & .search-bar {
     padding: 10px !important;
@@ -40,4 +47,9 @@ header {
       background-color: #f0f2f5;
     }
   }
+}
+
+/* Landing Carousel */
+.landing-carousel img {
+  height: 600px;
 }
