@@ -35,10 +35,16 @@ const loginSlice = createSlice({
       state.userInfo = null;
       state.error = payload;
     },
+    setLogout: (state) => {
+      state.loading = false;
+      state.userInfo = null;
+      state.error = null;
+    },
   },
 });
 
-export const { setLoading, setUserInfo, setError } = loginSlice.actions;
+export const { setLoading, setUserInfo, setError, setLogout } =
+  loginSlice.actions;
 
 export const loginSelector = (state) => state.login;
 
@@ -71,4 +77,9 @@ export const loginUser = (email, password) => async (dispatch, getState) => {
 export const setUserInfoByRegister = (userInfo) => async (dispatch) => {
   dispatch(setUserInfo(userInfo));
   localStorage.setItem("userInfo", JSON.stringify(userInfo));
+};
+
+export const userLogout = () => async (dispatch) => {
+  dispatch(setLogout());
+  localStorage.clear();
 };

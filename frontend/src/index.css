@@ -34,12 +34,10 @@ header {
     border: 1px solid #dedede;
     border-radius: 50%;
     transition: 0.2s background-color ease-in-out;
+    cursor: pointer;
 
     &:hover {
       background-color: #f0f2f5;
-    }
-    &:not(:last-child) {
-      margin-right: 10px;
     }
   }
 }
