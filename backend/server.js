@@ -4,6 +4,7 @@ import express from "express";
 import morgan from "morgan";
 import connectDb from "./config/db.js";
 import authRoutes from "./routes/auth.js";
+import promotionRoutes from "./routes/promotions.js";
 
 dotenv.config();
 
@@ -16,6 +17,7 @@ app.use(morgan("common")); // also changed it to other formats like "dev", "tiny
 app.use(express.json()); // Converts incoming requests JSON payload to JavaScript object.
 
 app.use("/api/auth", authRoutes);
+app.use("/api", promotionRoutes);
 
 const port = process.env.PORT || 5000;
 
