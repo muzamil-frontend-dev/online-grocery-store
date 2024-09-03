@@ -34,25 +34,27 @@ import "owl.carousel/dist/assets/owl.theme.default.css";
 //   },
 // ];
 
-const Carousel = ({ promotions }) => {
+const Carousel = ({ data, options }) => {
   //Owl Carousel Settings
-  const options = {
-    loop: true,
-    center: true,
-    items: 1,
-    margin: 0,
-    autoplay: true,
-    dots: false,
-    autoplayTimeout: 4500,
-    smartSpeed: 1000,
-    nav: false,
-  };
+  // const options = {
+  //   loop: true,
+  //   center: true,
+  //   items: 1,
+  //   margin: 0,
+  //   autoplay: true,
+  //   dots: false,
+  //   autoplayTimeout: 3500,
+  //   smartSpeed: 5000,
+  //   nav: false,
+  //   animateIn: options.animateIn || false,
+  //   animateOut: options.effect || false,
+  // };
   return (
     <OwlCarousel
       className="owl-carousel owl-theme landing-carousel"
       {...options}
     >
-      {promotions.map((item, index) => (
+      {data.map((item, index) => (
         <div key={index}>
           <img src={item.imageURL} alt="" />
         </div>
