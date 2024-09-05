@@ -1,12 +1,12 @@
 import mongoose from "mongoose";
-import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs";
 
 const userSchema = mongoose.Schema(
   {
     name: {
       type: mongoose.Schema.Types.String,
-      required: [true, "User name is required"],
+      required: [true, "User name is required."],
     },
     email: {
       type: String,
@@ -45,7 +45,7 @@ userSchema.methods.CreateToken = function () {
 
 userSchema.pre("save", async function (next) {
   if (this.isModified("password")) {
-    const salt = await bcrypt.genSalt(10);
+    let salt = await bcrypt.genSalt(10);
     this.password = await bcrypt.hash(this.password, salt);
   }
   next();

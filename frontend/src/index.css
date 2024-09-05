@@ -1,55 +1,43 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.app-main {
+    min-height: calc(100vh - 141px);
+}
+a {
+    color: inherit;
+    text-decoration: none;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+.product-card  {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
-  object-fit: cover;
+.product-card:hover {
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
 }
 
-/* Header Section */
-header {
-  padding: 10px 0;
-  border-bottom: 1px solid #007d2f;
-  background-color: #ffffff;
-  z-index: 999;
+div.form-control {
+    box-shadow: inset 0 -1px 0 #ddd;
+    transition: box-shadow .2s;
+}
 
-  & .search-bar {
-    padding: 10px !important;
-    border: 2px solid #dedede !important;
-    border-radius: 6px;
+.side-nav {
+    width: 250px;
+    min-height: calc(100vh - 160px);
   }
-
-  & .menu-opt {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #007d2f;
-    border: 1px solid #dedede;
-    border-radius: 50%;
-    transition: 0.2s background-color ease-in-out;
+  
+  .side-nav .list-group-item {
+    padding-left: 60px;
+  }
+  
+  .side-nav .list-group-item:hover {
+    font-weight: bold;
     cursor: pointer;
-
-    &:hover {
-      background-color: #f0f2f5;
+  }
+  
+  @media (max-width: 768px) {
+    .side-nav {
+      width: 100%;
+      text-align: center;
+      min-height: auto;
     }
   }
-}
-
-/* Landing Carousel */
-.landing-carousel img {
-  height: 400px;
-}
+  

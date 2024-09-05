@@ -1,18 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-
-let userInfoFormStorage = null;
+import { resetUserCart } from "../cart/cartSlice";
+let userInfoFromStorage = null;
 try {
-  userInfoFormStorage = localStorage.getItem("userInfo")
+  userInfoFromStorage = localStorage.getItem("userInfo")
     ? JSON.parse(localStorage.getItem("userInfo"))
     : null;
 } catch (error) {
-  userInfoFormStorage = null;
+  userInfoFromStorage = null;
 }
 
 const initialState = {
   loading: false,
-  userInfo: userInfoFormStorage,
+  userInfo: userInfoFromStorage,
   error: null,
 };
 
@@ -22,29 +22,28 @@ const loginSlice = createSlice({
   reducers: {
     setLoading: (state) => {
       state.loading = true;
-      state.userInfo = null;
       state.error = null;
+      state.userInfo = null;
     },
     setUserInfo: (state, { payload }) => {
       state.loading = false;
-      state.userInfo = payload;
       state.error = null;
+      state.userInfo = payload;
     },
     setError: (state, { payload }) => {
       state.loading = false;
-      state.userInfo = null;
       state.error = payload;
+      state.userInfo = null;
     },
     setLogout: (state) => {
       state.loading = false;
-      state.userInfo = null;
       state.error = null;
+      state.userInfo = null;
     },
   },
 });
 
-export const { setLoading, setUserInfo, setError, setLogout } =
-  loginSlice.actions;
+const { setError, setLoading, setUserInfo, setLogout } = loginSlice.actions;
 
 export const loginSelector = (state) => state.login;
 
@@ -53,20 +52,23 @@ export default loginSlice.reducer;
 export const loginUser = (email, password) => async (dispatch, getState) => {
   try {
     dispatch(setLoading());
-    const config = {
+    let config = {
       headers: {
         "content-type": "application/json",
       },
     };
     const { data } = await axios.post(
-      "/api/auth/login",
-      { email, password },
+      `/api/auth/login`,
+      {
+        email,
+        password,
+      },
       config
     );
     dispatch(setUserInfo(data));
     localStorage.setItem("userInfo", JSON.stringify(getState().login.userInfo));
   } catch (err) {
-    const error =
+    let error =
       err.response && err.response.data && err.response.data.message
         ? err.response.data.message
         : err.message;
@@ -79,7 +81,8 @@ export const setUserInfoByRegister = (userInfo) => async (dispatch) => {
   localStorage.setItem("userInfo", JSON.stringify(userInfo));
 };
 
-export const userLogout = () => async (dispatch) => {
+export const logoutUser = () => async (dispatch) => {
   dispatch(setLogout());
+  dispatch(resetUserCart());
   localStorage.clear();
 };
