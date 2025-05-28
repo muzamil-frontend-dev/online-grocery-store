@@ -1,9 +1,11 @@
 import dotenv from "dotenv";
 import ConnectDb from "./config/db.js";
-import users from "./data/users.js";
 import User from "./models/user.js";
+import users from "./data/users.js";
 import Promotion from "./models/promotion.js";
 import promotions from "./data/promotions.js";
+import Product from "./models/product.js";
+import products from "./data/products.js";
 
 dotenv.config();
 
@@ -12,9 +14,11 @@ const importData = async () => {
     ConnectDb();
     await User.deleteMany();
     await Promotion.deleteMany();
+    await Product.deleteMany();
 
     await User.insertMany(users);
     await Promotion.insertMany(promotions);
+    await Product.insertMany(products);
 
     console.log(`✅✅✅ Data imported successfully.`);
     process.exit(0);
@@ -29,6 +33,7 @@ const deleteData = async () => {
     ConnectDb();
     await User.deleteMany();
     await Promotion.deleteMany();
+    await Product.deleteMany();
     console.log(`✅✅✅ Data deleted successfully.`);
     process.exit(0);
   } catch (error) {

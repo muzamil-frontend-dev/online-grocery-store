@@ -3,6 +3,6 @@ import { getPromotions } from "../controllers/promotions.js";
 
 const router = express.Router();
 
-router.get("/promotions", getPromotions);
+router.get("/", getPromotions);
 
 export default router;

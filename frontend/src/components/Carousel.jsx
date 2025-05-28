@@ -51,7 +51,7 @@ const Carousel = ({ data, options }) => {
   // };
   return (
     <OwlCarousel
-      className="owl-carousel owl-theme landing-carousel"
+      className="owl-carousel owl-theme landing-carousel p-0"
       {...options}
     >
       {data.map((item, index) => (
