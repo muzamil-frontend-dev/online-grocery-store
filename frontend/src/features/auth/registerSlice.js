@@ -14,29 +14,28 @@ const registerSlice = createSlice({
   reducers: {
     setLoading: (state) => {
       state.loading = true;
-      state.success = false;
       state.error = null;
+      state.success = false;
     },
     setSuccess: (state) => {
       state.loading = false;
-      state.success = true;
       state.error = null;
+      state.success = true;
     },
     setError: (state, { payload }) => {
       state.loading = false;
-      state.success = false;
       state.error = payload;
+      state.success = false;
     },
     reset: (state) => {
       state.loading = false;
-      state.success = false;
       state.error = null;
+      state.success = false;
     },
   },
 });
 
-export const { setLoading, setSuccess, setError, reset } =
-  registerSlice.actions;
+const { setError, setLoading, setSuccess, reset } = registerSlice.actions;
 
 export const registerSelector = (state) => state.register;
 
@@ -45,22 +44,25 @@ export default registerSlice.reducer;
 export const registerUser = (name, email, password) => async (dispatch) => {
   try {
     dispatch(setLoading());
-    const config = {
+    let config = {
       headers: {
         "content-type": "application/json",
       },
     };
     const { data } = await axios.post(
-      "/api/auth/register",
-      { name, email, password },
+      `/api/auth/register`,
+      {
+        name,
+        email,
+        password,
+      },
       config
     );
-
     dispatch(setSuccess());
-    // Need to update login userInfo as well
-    setUserInfoByRegister(data);
+    // data need to be add in login userinfo
+    dispatch(setUserInfoByRegister(data));
   } catch (err) {
-    const error =
+    let error =
       err.response && err.response.data && err.response.data.message
         ? err.response.data.message
         : err.message;

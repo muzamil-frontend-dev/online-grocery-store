@@ -2,11 +2,11 @@ import mongoose from "mongoose";
 
 const productSchema = mongoose.Schema(
   {
-    // user: {
-    //   type: mongoose.Schema.Types.ObjectId,
-    //   required: true,
-    //   ref: "User",
-    // },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "User",
+    },
     name: {
       type: mongoose.Schema.Types.String,
       required: [true, "Product name is required."],

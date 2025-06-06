@@ -1,9 +1,8 @@
 import dotenv from "dotenv";
+import colors from "colors";
 import ConnectDb from "./config/db.js";
 import User from "./models/user.js";
 import users from "./data/users.js";
-import Promotion from "./models/promotion.js";
-import promotions from "./data/promotions.js";
 import Product from "./models/product.js";
 import products from "./data/products.js";
 

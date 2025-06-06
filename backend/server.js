@@ -1,32 +1,50 @@
+import express from "express";
 import dotenv from "dotenv";
 import colors from "colors";
-import express from "express";
 import morgan from "morgan";
-import connectDb from "./config/db.js";
-import authRoutes from "./routes/auth.js";
-import promotionRoutes from "./routes/promotions.js";
+import errorHandler from "./middleware/errorHandler.js";
 import productRoutes from "./routes/products.js";
+import authRoutes from "./routes/auth.js";
+import orderRoutes from "./routes/orders.js";
+import adminRoutes from "./routes/admin.js";
+import ConnectDb from "./config/db.js";
+import path from "path";
 
 dotenv.config();
 
-connectDb();
+ConnectDb();
 
 const app = express();
-// Using for logging purpose
-app.use(morgan("common")); // also changed it to other formats like "dev", "tiny", "combined" etc.
 
-app.use(express.json()); // Converts incoming requests JSON payload to JavaScript object.
+app.use(morgan("common"));
 
+app.use(express.json());
+
+app.use("/api/products", productRoutes);
 app.use("/api/auth", authRoutes);
-app.use("/api/promotions", promotionRoutes);
+app.use("/api/promotions/orders", orderRoutes);
+app.use("/api/admin", adminRoutes);
+
+const __dir = path.resolve();
+
+app.use("/uploads", express.static(path.join(__dir, "uploads")));
+
+if (process.env.NODE_MODE === "production") {
+  app.use("/", express.static(path.join(__dir, "frontend", "build")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dir, "frontend", "build", "index.html"));
+  });
+}
+
+app.use(errorHandler);
 app.use("/api/products", productRoutes);
 
 const port = process.env.PORT || 5000;
 
 app.listen(port, () => {
   console.log(
-    colors.bgCyan(
-      `Application is running in ${process.env.NODE_MODE} mode at port ${port}`
-    )
+    `Application is running in ${process.env.NODE_MODE} mode at port ${port}.`
+      .bgCyan
   );
 });

@@ -1,6 +1,5 @@
-import asyncHandler from "express-async-handler";
 import User from "../models/user.js";
-
+import asyncHandler from "express-async-handler";
 // Path         /api/auth/login
 // Type         Post
 // Access       Public
@@ -11,11 +10,12 @@ export const login = asyncHandler(async (req, res) => {
 
   if (!user) {
     res.statusCode = 400;
-    throw new Error("Invalid email or password");
+    throw new Error("Invalid email or password.");
   }
+
   if (!(await user.ValidatePassword(password))) {
     res.statusCode = 400;
-    throw new Error("Invalid email or password");
+    throw new Error("Invalid email or password.");
   }
 
   res.json({
@@ -30,7 +30,7 @@ export const login = asyncHandler(async (req, res) => {
 // Path         /api/auth/register
 // Type         Post
 // Access       Public
-// Desc         Register New user
+// Desc         Register new user
 export const register = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
   const user = new User({
@@ -38,6 +38,7 @@ export const register = asyncHandler(async (req, res) => {
     email,
     password,
   });
+
   const createdUser = await user.save();
   res.json({
     _id: createdUser._id,

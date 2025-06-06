@@ -1,7 +1,7 @@
 const products = [
   {
     name: "Mobile Black Shirt",
-    image: "/images/product-images/apples.jpg",
+    image: "/images/mobile-shirt.jpg",
     description:
       "Reactive Dyeing according to International Standard.Combed Yarn Jersey 100% Cotton.Screen Printed.Rib 1×1.",
     color: "black",
@@ -15,7 +15,7 @@ const products = [
   },
   {
     name: "Butterfly Black Shirt",
-    image: "/images/product-images/carrot.jpg",
+    image: "/images/butterfly-shirt.jpg",
     description:
       "100% Cotton with Machine Washable Short-sleeve classic tee featuring ribbed crew neckline. Pre-shrunk for fit 4.5-ounce ring-spun cotton Either tagless or with easily removed tearaway tag for comfort",
     color: "black",
@@ -29,7 +29,7 @@ const products = [
   },
   {
     name: "Rabbit Blue Shirt",
-    image: "/images/product-images/cucumber.jpg",
+    image: "/images/Blue-shirt-rabbit.jpg",
     description:
       "100% Cotton with Machine Washable Short-sleeve classic tee featuring ribbed crew neckline. Pre-shrunk for fit 4.5-ounce ring-spun cotton Either tagless or with easily removed tearaway tag for comfort",
     color: "blue",
@@ -43,7 +43,7 @@ const products = [
   },
   {
     name: "Cherries Pink Shirt",
-    image: "/images/product-images/redish-red.jpg",
+    image: "/images/cherries-shirt.jpg",
     description:
       "100% Cotton with Machine Washable Short-sleeve classic tee featuring ribbed crew neckline. Pre-shrunk for fit 4.5-ounce ring-spun cotton Either tagless or with easily removed tearaway tag for comfort",
     color: "pink",
@@ -57,7 +57,7 @@ const products = [
   },
   {
     name: "Cycle Red Shirt",
-    image: "/images/product-images/redish-white.jpg",
+    image: "/images/Red-shirt-cycle.jpg",
     description:
       "100% Cotton with Machine Washable Short-sleeve classic tee featuring ribbed crew neckline. Pre-shrunk for fit 4.5-ounce ring-spun cotton Either tagless or with easily removed tearaway tag for comfort",
     color: "red",
@@ -69,6 +69,19 @@ const products = [
     numReviews: 10,
     isActive: true,
   },
+  {
+    name: "Listen Green Shirt",
+    image: "/images/Green-Shirt-Headphone.jpg",
+    description:
+      "100% Cotton with Machine Washable Short-sleeve classic tee featuring ribbed crew neckline. Pre-shrunk for fit 4.5-ounce ring-spun cotton Either tagless or with easily removed tearaway tag for comfort",
+    color: "green",
+    category: "Boys",
+    fabric: "Combed Yarn Jersey 100% Cotton",
+    price: 950,
+    countInStock: 0,
+    rating: 4,
+    numReviews: 12,
+    isActive: true,
+  },
 ];
-
 export default products;

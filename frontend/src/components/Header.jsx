@@ -1,102 +1,63 @@
 import React from "react";
-import { Container, Row, Col, Dropdown } from "react-bootstrap";
+import { Navbar, Container, Nav, Badge, NavDropdown } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faBars,
   faCartShopping,
-  faHeart,
   faUser,
+  faBasketShopping,
 } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loginSelector, userLogout } from "../features/auth/loginSlice";
+import { cartSelector } from "../features/cart/cartSlice";
+import { loginSelector, logoutUser } from "../features/auth/loginSlice";
 
 const Header = () => {
+  const { cartItems } = useSelector(cartSelector);
   const { userInfo } = useSelector(loginSelector);
 
   const dispatch = useDispatch();
-  const handleLogout = () => {
-    dispatch(userLogout());
+
+  const logout = () => {
+    dispatch(logoutUser());
   };
-
-  const customToggle = React.forwardRef(({ children, onClick }, ref) => (
-    <div
-      className="menu-opt d-none d-md-flex"
-      ref={ref}
-      onClick={(e) => {
-        e.preventDefault();
-        onClick(e);
-      }}
-    >
-      {children}
-    </div>
-  ));
-
   return (
-    <header>
-      <Container fluid>
-        <Row className="align-items-center">
-          <Col className="d-md-none">
-            <div className="menu-opt">
-              <FontAwesomeIcon icon={faBars} />
-            </div>
-          </Col>
-          <Col>
-            <Link to="/">
-              <img src="./images/logo.png" alt="App Logo" />
-            </Link>
-          </Col>
-          <Col>
-            <div className="d-flex justify-content-end">
-              <div className="menu-opt d-none d-md-flex">
-                <FontAwesomeIcon icon={faHeart} />
-              </div>
-              <>
-                {!userInfo ? (
-                  <Link to={"/login"}>
-                    <div className="menu-opt d-none d-md-flex mx-2">
-                      <FontAwesomeIcon icon={faUser} />
-                    </div>
-                  </Link>
-                ) : (
-                  <Dropdown className="mx-2">
-                    <Dropdown.Toggle as={customToggle} id="dropdown-basic">
-                      <FontAwesomeIcon icon={faUser} />
-                    </Dropdown.Toggle>
+    <Navbar bg="primary" expand="lg" variant="dark">
+      <Container>
+        <Navbar.Brand as={NavLink} to="/">
+          <FontAwesomeIcon icon={faBasketShopping} /> Basket
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="ms-auto">
+            <Nav.Link as={NavLink} to="/cart">
+              <FontAwesomeIcon icon={faCartShopping} /> Cart &nbsp;
+              <Badge pill bg="secondary">
+                {cartItems.length}
+              </Badge>
+            </Nav.Link>
 
-                    <Dropdown.Menu>
-                      <Dropdown.Item href="#/action-1">
-                        User: {userInfo.name}
-                      </Dropdown.Item>
-                      <Dropdown.Divider />
-                      <Dropdown.Item>
-                        <div onClick={handleLogout}>
-                          <span>Logout</span>
-                        </div>
-                      </Dropdown.Item>
-                    </Dropdown.Menu>
-                  </Dropdown>
+            {userInfo ? (
+              <NavDropdown title={userInfo.name} id="basic-nav-dropdown">
+                <NavDropdown.Item as={NavLink} to="/profile">
+                  Profile
+                </NavDropdown.Item>
+                {userInfo.isAdmin && (
+                  <NavDropdown.Item as={NavLink} to="/admin">
+                    Admin
+                  </NavDropdown.Item>
                 )}
-              </>
-              <Dropdown>
-                <Dropdown.Toggle as={customToggle} id="dropdown-basic">
-                  <FontAwesomeIcon icon={faCartShopping} />
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
-                  <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                  <Dropdown.Item href="#/action-2">
-                    Another action
-                  </Dropdown.Item>
-                  <Dropdown.Item href="#/action-3">
-                    Something else
-                  </Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-            </div>
-          </Col>
-        </Row>
+                <NavDropdown.Divider />
+                <NavDropdown.Item onClick={logout}>Logout</NavDropdown.Item>
+              </NavDropdown>
+            ) : (
+              <Nav.Link as={NavLink} to="/login">
+                <FontAwesomeIcon icon={faUser} /> Login
+              </Nav.Link>
+            )}
+          </Nav>
+        </Navbar.Collapse>
       </Container>
-    </header>
+    </Navbar>
   );
 };
 
