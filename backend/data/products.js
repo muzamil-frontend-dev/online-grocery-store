@@ -84,5 +84,4 @@ const products = [
     isActive: true,
   },
 ];
-
 export default products;

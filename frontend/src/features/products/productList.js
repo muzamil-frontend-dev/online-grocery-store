@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
-  loading: true,
+  loading: false,
   products: [],
   error: null,
 };
@@ -29,16 +29,17 @@ const productListSlice = createSlice({
   },
 });
 
-const { setLoading, setError, setProducts } = productListSlice.actions;
+const { setLoading, setProducts, setError } = productListSlice.actions;
 
 export const productListSelector = (state) => state.productList;
 
 export default productListSlice.reducer;
 
-export const fetchProducts = () => async (dispatch) => {
+export const getProducts = () => async (dispatch) => {
   try {
     dispatch(setLoading());
     const { data } = await axios.get("/api/products");
+    console.log("data: ", data);
     dispatch(setProducts(data));
   } catch (error) {
     const errorMessage =

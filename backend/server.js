@@ -22,22 +22,23 @@ app.use(express.json());
 
 app.use("/api/products", productRoutes);
 app.use("/api/auth", authRoutes);
-app.use("/api/orders", orderRoutes);
+app.use("/api/promotions/orders", orderRoutes);
 app.use("/api/admin", adminRoutes);
 
 const __dir = path.resolve();
 
 app.use("/uploads", express.static(path.join(__dir, "uploads")));
 
-if(process.env.NODE_MODE === "production") {
+if (process.env.NODE_MODE === "production") {
   app.use("/", express.static(path.join(__dir, "frontend", "build")));
 
-  app.get("*", (req,res) => {
-    res.sendFile(path.join(__dir, "frontend", 'build', 'index.html'));
-  })
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dir, "frontend", "build", "index.html"));
+  });
 }
 
 app.use(errorHandler);
+app.use("/api/products", productRoutes);
 
 const port = process.env.PORT || 5000;
 
